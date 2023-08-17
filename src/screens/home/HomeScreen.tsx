@@ -12,7 +12,7 @@ const { Title, Link, Text } = Typography;
 export const HomeScreen = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const storageEntrity = localStorage.getItem("id");
-  const availableCount = 6;
+  const availableCount = 8;
   const [total, setTotal] = useState([
     {
       name: "1",
