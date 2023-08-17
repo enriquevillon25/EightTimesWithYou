@@ -62,7 +62,7 @@ export const HomeScreen = () => {
             </Link>
           </Text>
           <br />
-          <Text>Sería hermoso viajar contigo</Text>
+          <Text>Sería hermoso viajar contigo, invito todo</Text>
         </>
       ),
     },
