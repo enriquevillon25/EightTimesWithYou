@@ -32,7 +32,7 @@ export const CardComponent = ({
     <div className={`container ${test && "test"}`}>
       <div className="card">
         <div className="front" onClick={onClick}>
-          {number}
+          <Title level={1}> {number}</Title>
         </div>
         <div className="back">
           <div

@@ -11,7 +11,8 @@ import { Typography } from "antd";
 const { Title, Link, Text } = Typography;
 export const HomeScreen = () => {
   const [messageApi, contextHolder] = message.useMessage();
-
+  const storageEntrity = localStorage.getItem("id");
+  const availableCount = 4;
   const [total, setTotal] = useState([
     {
       name: "1",
@@ -87,7 +88,7 @@ export const HomeScreen = () => {
       title: "Viaje costa con Drako",
       titleBody: "Recorrer la costa con drako",
       textBody:
-        "Recorramos la costa sur con Drako conocer chincha, pisco, paracas, quedarnos en hoteles con drako y tomarnos muchas fotos conocer nuevos lugares con el",
+        "Recorramos la costa sur con Drako conocer chincha, pisco, paracas, quedarnos en hoteles con drako y tomarnos muchas fotos conocer nuevos lugares con nuestro hijo",
     },
     {
       name: "6",
@@ -143,12 +144,11 @@ export const HomeScreen = () => {
       ),
     },
   ]);
-
-  const storageEntrity = localStorage.getItem("id");
   const [entrity, setEntrity] = useState<any>(
     storageEntrity !== null ? JSON.parse(storageEntrity) : []
   );
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
+
   const takeSpin = (value: any) => {
     const arrnew = total.map((response: any) => {
       return {
@@ -163,7 +163,7 @@ export const HomeScreen = () => {
     messageApi.open({
       type: "success",
       content:
-        "Ya no puedes visualizar mas cartas. Pónganse en coontactocon el administrador",
+        "No puedes visualizar mas cartas. Pónganse en coontacto con el administrador",
       className: "custom-class",
       style: {
         marginTop: "40vh",
@@ -176,7 +176,7 @@ export const HomeScreen = () => {
     console.log("entirty", entrity);
     if (
       entrity.some((response: any) => response === value) ||
-      entrity.length < 4
+      entrity.length < availableCount
     ) {
       takeSpin(value);
     }
@@ -184,7 +184,7 @@ export const HomeScreen = () => {
     if (
       storedValue !== null &&
       JSON.parse(storedValue).length === 4 &&
-      entrity.length === 4
+      entrity.length === availableCount
     ) {
       success();
       return;
@@ -231,12 +231,15 @@ export const HomeScreen = () => {
         </div>
       </div>
       <Modal
-        title="Solo puedes dar click a 4 cartas"
+        title={`Puedes dar click a ${availableCount - entrity.length} cartas`}
         open={show}
         onOk={() => setShow(false)}
         onCancel={() => setShow(false)}
+        style={{ marginTop: "25vh" }}
       >
-        !Escoge Bien!
+        {availableCount - entrity.length === 0
+          ? "Contacta con el administrador"
+          : "!Escoge Bien!"}
       </Modal>
     </>
   );
